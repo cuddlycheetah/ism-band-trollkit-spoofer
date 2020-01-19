@@ -8,11 +8,11 @@ import protocols.Nexus
 
 nexus = protocols.Nexus.Nexus_TempHumidity()
 data = nexus.generateData(244, 1, 0, 100)
-print([int(x) for x in data])
-samples = nexus.generateSamples(244, 1, 0, 100)
-f = open("test.cu8", "w")
-f.write(bytearray(samples))
-f.close()
+samples = nexus.generateSamples(baseband_samplerate=2e6, id=244, channel=1, temp=30, humidity=100)
+with open('nexus.iq', 'wb') as f:
+    samples.tofile(f)
+
+
 
 ## Transmit Part
 SDR_ARGS = {'driver': 'lime'}
