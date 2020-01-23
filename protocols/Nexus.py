@@ -21,14 +21,16 @@ class Nexus_TempHumidity:
     def generateSamples(self, baseband_samplerate=2e6, id=244, channel=1, temp=30, humidity=100, numpyType=np.complex64):
         modulator = OOKModulator(baseband_samplerate=baseband_samplerate, am_frequency=22.471e3)
         bits = self.generateData(id, channel, temp, humidity)
-        for j in bits:
+        for repeat in range(0, 4):
+            for j in bits:
+                modulator.addModulation(500)
+                modulator.addPadding(1000 * (1 + int(j)))
             modulator.addModulation(500)
-            modulator.addPadding(1000 * (1 + int(j)))
-        modulator.addModulation(500)
-        modulator.addPadding(4000)
+            modulator.addPadding(4000)
         return modulator.getSamplesAndReset(numpyType)
 
     def generatePacket(self, id=244, channel=1, temp=30, humidity=100):
+        temp = int(temp * 10)
         packet = [
             (id >> 4) & 0x0f,
             id & 0x0f,

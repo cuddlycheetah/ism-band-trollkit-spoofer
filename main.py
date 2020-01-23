@@ -7,12 +7,15 @@ from SoapySDR import * #SOAPY_SDR_* constants
 import protocols.Nexus
 
 nexus = protocols.Nexus.Nexus_TempHumidity()
-data = nexus.generateData(244, 1, 0, 100)
-samples = nexus.generateSamples(baseband_samplerate=2e6, id=244, channel=1, temp=30, humidity=100)
-with open('nexus.iq', 'wb') as f:
-    samples.tofile(f)
+with open('output.complex', 'wb') as f:
+    for bt_id in range(0,255):
+        for bt_channel in range(0,4):
+            samples = nexus.generateSamples(baseband_samplerate=2e6, id=bt_id, channel=bt_channel, temp=-50, humidity=100)
+            samples.tofile(f)
+        print("Generated Sensor ID %d Nexus Samples" % bt_id)
+        #
 
-
+"""
 
 ## Transmit Part
 SDR_ARGS = {'driver': 'lime'}
@@ -47,3 +50,4 @@ time.sleep(0.1)
 
 sdr.deactivateStream(txStream)
 sdr.closeStream(txStream)
+"""
