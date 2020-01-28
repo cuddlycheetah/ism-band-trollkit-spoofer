@@ -8,7 +8,7 @@ import protocols.Nemaxx_WL10_SmokeDetector
 
 nemaxx = protocols.Nemaxx_WL10_SmokeDetector.Nemaxx_WL10_SmokeDetector()
 with open('output.complex', 'wb') as f:
-    samples = nemaxx.generateSamples(repeatNum=10)
+    samples = nemaxx.generateSamples(repeatNum=10, alarmTheSlave=True)
     samples.tofile(f)
 
 """

@@ -8,9 +8,9 @@ class Nemaxx_WL10_SmokeDetector:
         self.modulator = OOKModulator(baseband_samplerate=baseband_samplerate, am_frequency=22.471e3)
     def test(self):
         print("Nemaxx WL10 Smokedetector (433MHz)")
-    def generateSamples(self, repeatNum=20, numpyType=np.complex64):
+    def generateSamples(self, repeatNum=20, alarmID24Bit, numpyType=np.complex64):
         for i in range(repeatNum):
-            bits = [0,1,0,0,0,1,1,1,0,1,0,1,1,0,1,1,1,1,1,0,1,0,1,0]
+            bits = alarmID24Bit
             print(bits)
             self.modulator.addModulation(8120)
             self.modulator.addPadding(912)
