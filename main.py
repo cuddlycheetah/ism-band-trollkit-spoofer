@@ -7,8 +7,8 @@ from SoapySDR import * #SOAPY_SDR_* constants
 import protocols.Nemaxx_WL10_SmokeDetector
 
 nemaxx = protocols.Nemaxx_WL10_SmokeDetector.Nemaxx_WL10_SmokeDetector()
-with open('nemaxx.complex', 'wb') as f:
-    samples = nemaxx.generateSamples(repeatNum=20)
+with open('output.complex', 'wb') as f:
+    samples = nemaxx.generateSamples(repeatNum=10)
     samples.tofile(f)
 
 """

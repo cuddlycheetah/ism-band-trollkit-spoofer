@@ -19,5 +19,6 @@ class Nemaxx_WL10_SmokeDetector:
                 self.modulator.addPadding(1400 if int(j) == 0 else 2750)
             self.modulator.addModulation(795)
             self.modulator.addPadding(1337) # Packet Sync
+            self.modulator.addPadding(20000)
 
         return self.modulator.getSamplesAndReset(numpyType)
