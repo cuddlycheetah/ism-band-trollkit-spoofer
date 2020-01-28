@@ -118,12 +118,7 @@ for i in range(4):
         1,0,0,0,
         1,0,0,1
     ]
-    bits = bitsStart + [
-        0,0,
-        1,0,1,0,
-        1,0,1,0,
-        1,1,1,0
-    ]
+    bits = bitsStart + bits_43_4
     #bits = data2
     print(bits)
     print(len(bits))

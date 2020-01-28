@@ -4,16 +4,12 @@ import SoapySDR
 from SoapySDR import * #SOAPY_SDR_* constants
 
 # Protocol part
-import protocols.Nexus
+import protocols.Nemaxx_WL10_SmokeDetector
 
-nexus = protocols.Nexus.Nexus_TempHumidity()
-with open('output.complex', 'wb') as f:
-    for bt_id in range(0,255):
-        for bt_channel in range(0,4):
-            samples = nexus.generateSamples(baseband_samplerate=2e6, id=bt_id, channel=bt_channel, temp=-50, humidity=100)
-            samples.tofile(f)
-        print("Generated Sensor ID %d Nexus Samples" % bt_id)
-        #
+nemaxx = protocols.Nemaxx_WL10_SmokeDetector.Nemaxx_WL10_SmokeDetector()
+with open('nemaxx.complex', 'wb') as f:
+    samples = nemaxx.generateSamples(repeatNum=20)
+    samples.tofile(f)
 
 """
 
